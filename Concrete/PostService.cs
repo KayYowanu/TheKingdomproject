@@ -16,12 +16,13 @@ namespace TheGospel.Concrete
             this._postrepo = _postrepo;
         }
 
-        public Task<int> CreatePost(TKAPosts tkaposts)
+        public Task<int> CreatePost(TKAPosts tkaposts, string Username)
         {
             var dbPara = new DynamicParameters();
             dbPara.Add("Title", tkaposts.Title, DbType.String);
             dbPara.Add("Description", tkaposts.Description, DbType.String);
-            var PostId = Task.FromResult(_postrepo.InsertPost<int>("[dbo].[Add_Post]",
+            dbPara.Add("Username", Username, DbType.String);
+            var PostId = Task.FromResult(_postrepo.InsertPost<int>("[dbo].[Create_Post]",
                             dbPara,
                             commandType: CommandType.StoredProcedure));
             return PostId;

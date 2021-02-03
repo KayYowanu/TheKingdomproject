@@ -1,6 +1,8 @@
 ﻿@page "/addPost"
 @inject IPostService postService
 @inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor httpContextAccessor
 <AuthorizeView>
     <Authorized>
         <h1>
@@ -25,21 +27,23 @@
             </div>
         </div>
 
-    
-@code {
 
-    TKAPosts tkaposts = new TKAPosts();
-    protected async Task CreatePost()
-    {
-        await postService.CreatePost(tkaposts);
-        navigationManager.NavigateTo("/myposts");
-    }
+        @code {
 
-    void cancel()
-    {
-        navigationManager.NavigateTo("/myposts");
-    }
+            TKAPosts tkaposts = new TKAPosts();
+            public string UserName;
+            protected async Task CreatePost()
+            {
+                UserName = httpContextAccessor.HttpContext.User.Identity.Name;
+                await postService.CreatePost(tkaposts, UserName);
+                navigationManager.NavigateTo("/myposts");
+            }
 
-}
-</Authorized>
-    </AuthorizeView>
+            void cancel()
+            {
+                navigationManager.NavigateTo("/myposts");
+            }
+
+        }
+    </Authorized>
+</AuthorizeView>

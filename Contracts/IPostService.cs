@@ -6,7 +6,7 @@ namespace TheGospel.Contracts
 {
     public interface IPostService
     {
-        Task<int> CreatePost(TKAPosts tkaposts);
+        Task<int> CreatePost(TKAPosts tkaposts, string Username);
         Task<int> DeletePost(int Id);
         Task<int> CountPost(string search);
         Task<int> UpdatePost(TKAPosts tkaposts);

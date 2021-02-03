@@ -48,6 +48,9 @@ namespace TheGospel
             services.AddScoped<IPostService, PostService>();
             //Register dapper in scope  
             services.AddScoped<IPostRepo, PostRepo>();
+            
+            //For current user
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,5 +1,6 @@
 ﻿@page "/"
-
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor httpContextAccessor
 
 <AuthorizeView>
     <NotAuthorized>
@@ -7,10 +8,18 @@
     </NotAuthorized>
     <Authorized>
         <p>@context.User.Identity.Name</p>
-
+        <label asp-for="Input.context.User.Identity.Name"></label>
     </Authorized>
 </AuthorizeView>
 
 
-@code{
+<h1>@UserName</h1>
+
+@code {
+    public string UserName;
+
+    protected override async Task OnInitializedAsync()
+    {
+        UserName = httpContextAccessor.HttpContext.User.Identity.Name;
+    }
 }
