@@ -11,6 +11,7 @@ namespace TheGospel.Contracts
         DbConnection GetConnection();
         T GetPost<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);
         List<T> GetAllPosts<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);
+        List<T> GetAllUserPosts<T>(string username, string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);
         int ExecutePost(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);
         T InsertPost<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);
         T UpdatePost<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);

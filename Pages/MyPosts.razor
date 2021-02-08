@@ -1,6 +1,8 @@
 ﻿@page "/myposts"
 @inject IPostService postService
 @inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor httpContextAccessor
 
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -71,7 +73,9 @@ else
         }
 
     }
-    <button type="button" class="btn btn-danger float-right" @onclick="() => cancel()">Back</button><br/><br/>
+    <button type="button" class="btn btn-danger float-right" @onclick="() => cancel()">Back</button>
+    <br />
+    <br />
 
     <div class="pagination">
         <button class="btn btn-custom" @onclick=@(async ()=>await NavigateToPage("previous"))>Prev</button>
@@ -120,14 +124,15 @@ else
     string sortDir = "DESC";
 
     #endregion
-
+    public string UserName;// = "user1@gmail.com";
     protected override async Task OnInitializedAsync()
     {
+        UserName = httpContextAccessor.HttpContext.User.Identity.Name;
         //display total page buttons
         pagerSize = 3;
         pageSize = 5;
         curPage = 1;
-        postModel = await postService.ListAllPosts((curPage - 1) * pageSize, pageSize, sortColumnName, sortDir, searchTerm);
+        postModel = await postService.ListAllUserPosts(UserName, (curPage - 1) * pageSize, pageSize, sortColumnName, sortDir, searchTerm);
         totalRecords = await postService.CountPost(searchTerm);
         totalPages = (int)Math.Ceiling(totalRecords / (decimal)pageSize);
         SetPagerSize("forward");

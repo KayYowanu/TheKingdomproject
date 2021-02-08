@@ -12,6 +12,8 @@ namespace TheGospel.Contracts
         Task<int> UpdatePost(TKAPosts tkaposts);
         Task<TKAPosts> GetPostById(int Id);
         Task<List<TKAPosts>> ListAllPosts(int skip, int take, string orderBy, string direction, string search);
+        //USER POSTS
+        Task<List<TKAPosts>> ListAllUserPosts(string username, int skip, int take, string orderBy, string direction, string search);
 
         /*FOR COMMENT IMPLEMENTATION*/
         Task<int> CreateComment(TKAComments tkacomments, TKAPosts tkaposts);

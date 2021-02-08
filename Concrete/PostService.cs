@@ -56,6 +56,13 @@ namespace TheGospel.Concrete
             return posts;
         }
 
+        public Task<List<TKAPosts>> ListAllUserPosts(string username, int skip, int take, string orderBy, string direction = "DESC", string search = "")
+        {
+            var posts = Task.FromResult(_postrepo.GetAllPosts<TKAPosts>
+                ($"SELECT * FROM [TKAPosts] WHERE Username = '{username}' ORDER BY {orderBy} {direction} OFFSET {skip} ROWS FETCH NEXT {take} ROWS ONLY; ", null, commandType: CommandType.Text));
+            return posts;
+        }
+
         public Task<int> UpdatePost(TKAPosts tkapost)
         {
             var dbPara = new DynamicParameters();

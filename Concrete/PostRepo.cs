@@ -34,6 +34,11 @@ namespace TheGospel.Concrete
             using IDbConnection db = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
             return db.Query<T>(sp, parms, commandType: commandType).ToList();
         }
+        public List<T> GetAllUserPosts<T>(string username, string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)
+        {
+            using IDbConnection db = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+            return db.Query<T>(sp, parms, commandType: commandType).ToList();
+        }
 
         public int ExecutePost(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)
         {
