@@ -1,59 +1,45 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">The Gospel</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
+﻿  <!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="services">
-                <span aria-hidden="true"></span> Services
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="aboutus">
-                <span aria-hidden="true"></span> About Us
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="events">
-                <span aria-hidden="true"></span> Events & News
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="contactus">
-                <span aria-hidden="true"></span> Contact Us
-            </NavLink>
-        </li>
-        <AuthorizeView>
-        <Authorized>
-            <li class="nav-item px-3">
-                <NavLink class="nav-link" href="postlist">
-                    <span aria-hidden="true"></span> Heavenly Ideas
-                </NavLink>
-            </li>
-        </Authorized>
-        </AuthorizeView>
-    </ul>
-</div>
+        <h1 class="logo mr-auto"><a href="/">The Kingdom Age</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-    
-        
-   
-        @code {
-            private bool collapseNavMenu = true;
+        <nav class="nav-menu d-none d-lg-block">
+            <ul>
 
-            private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-            private void ToggleNavMenu()
-            {
-                collapseNavMenu = !collapseNavMenu;
-            }
-        }
+                <li class="active"><a href="/">Home</a></li>
+                <li class="drop-down">
+                    <a href="#">About</a>
+                    <ul>
+                        <li><a href="#">Our Pastor</a></li>
+                        <li><a href="#">Our Members</a></li>
+                        <li><a href="#">Our Beliefs</a></li>
+                        <li><a href="#">Our Ministries</a></li>
+                    </ul>
+                </li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="/gallery">Sermons</a></li>
+                <li><a href="/contactus">Contact us</a></li>
+                <AuthorizeView>
+                    <Authorized>
+                        <li><a href="/postlist">Heavenly Ideas</a></li>
+                        <li class="drop-down">
+                            <a href="">Profile</a>
+                            <ul>
+                                <li><a href="#">My Account</a></li>
+                                <li><a href="#">Log-out</a></li>
+                            </ul>
+                        </li>
+                    </Authorized>
+                </AuthorizeView>
+            </ul>
+        </nav><!-- .nav-menu -->
+        <AuthorizeView> 
+                <NotAuthorized>
+                    <a href="#about" class="get-started-btn scrollto"><LoginDisplay /></a>
+                </NotAuthorized>
+            </AuthorizeView>
+    </div>
+</header><!-- End Header -->

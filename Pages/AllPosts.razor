@@ -1,86 +1,101 @@
 ﻿@page "/postlist"
 @inject IPostService postService
 
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-<style>
-    .sort-th {
-        cursor: pointer;
-    }
 
-    .fa {
-        float: right;
-    }
-
-    .btn-custom {
-        color: black;
-        float: left;
-        padding: 8px 16px;
-        text-decoration: none;
-        transition: background-color .3s;
-        border: 2px solid #000;
-        margin: 0px 5px 0px 5px;
-    }
-    .truncate {
-        font-size: 15px;
-        width: 100%;
-        /**Major Properties**/
-        overflow: hidden;
-        line-height: 1.5rem;
-        max-height: 8rem;
-        -webkit-box-orient: vertical;
-        display: block;
-        display: -webkit-box;
-        overflow: hidden !important;
-        -webkit-line-clamp: 3;
-    }
-</style>
-
-<div>
-    <a class="btn btn-success float-right" href='/myposts'>View my Posts</a>
-</div>
-<br />
 
 @if (postModel == null)
 {
-<button class="btn btn-primary" disabled>
-    <span class="spinner-border spinner-border-sm"></span>
-    Loading..
-</button>
+    <button class="btn btn-primary" disabled>
+        <span class="spinner-border spinner-border-sm"></span>
+        Loading..
+    </button>
 }
 else
 {
+    <div class="btn btn-danger space100" style="margin-left:15%;" href='/myposts'>View my Posts</div>
+    <section id="blog" class="blog space50">
+        <div class="container" style="min-width:100%; padding-left:15%;">
+
+
+
             @if (postModel == null || postModel.Count == 0)
             {
                 <p>There are no posts available</p>
             }
+
             else
             {
-            
-               @foreach (var tka in postModel) { 
-           <div class="card-body">
-               <h5 class="card-title">@tka.Title</h5>
-               <p>
-                   <div class="card-text truncate">@tka.Description</div><a class="btn btn-primary" Text="Read more" href='/postDetails/@tka.PostId'>Read more...</a>
-               </p>
-           </div>
-               }
-        
+
+
+                <!-- ======= Blog Section ======= -->
+
+
+                @foreach (var tka in postModel)
+                {
+
+
+
+                    <div class="row">
+
+                        <div class="col-lg-8 entries">
+
+                            <div class="row">
+                                <div class="col-md-12 align-items-stretch">
+                                    <article class="entry">
+
+                                        <!--   <div class="entry-img">
+                                                <img src="/img/slide/slide-1.jpg" alt="" class="img-fluid">
+                                            </div>
+                                        -->
+
+                                        <h2 class="entry-title">
+                                            <a href="blog-single.html">@tka.Title</a>
+                                        </h2>
+
+                                        <div class="entry-meta">
+                                            <ul>
+                                                <li class="d-flex align-items-center"><i class="icofont-user"></i>@tka.Username</li>
+                                                <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i>@tka.CreatedOn</li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="entry-content">
+                                            <p>
+                                                <div class="card-text truncate">@tka.Description</div>
+                                            </p>
+                                            <div class="read-more">
+                                                <a href="/postDetails/@tka.PostId">Read More</a>
+                                            </div>
+                                        </div>
+
+                                    </article><!-- End blog entry -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+
             }
-    <div class="pagination">
-        <button class="btn btn-custom" @onclick=@(async ()=>await NavigateToPage("previous"))>Prev</button>
+            <div class="pagination" style="margin-left:27%;">
+                <button class="btn btn-custom" @onclick=@(async () => await NavigateToPage("previous"))>Prev</button>
 
-        @for (int i = startPage; i <= endPage; i++)
-        {
-            var currentPage = i;
-            <button class="btn btn-custom pagebutton @(currentPage==curPage?"btn-danger":"")" @onclick=@(async () =>await refreshRecords(currentPage))>
-                @currentPage
-            </button>
-        }
+                @for (int i = startPage; i <= endPage; i++)
+                {
+                    var currentPage = i;
+                    <button class="btn btn-custom pagebutton @(currentPage == curPage ? "btn-danger" : "")" @onclick=@(async () => await refreshRecords(currentPage))>
+                        @currentPage
+                    </button>
+                }
 
-        <button class="btn btn-custom" @onclick=@(async ()=>await NavigateToPage("next"))>Next</button>
+                <button class="btn btn-custom" @onclick=@(async () => await NavigateToPage("next"))>Next</button>
 
-    </div>
+            </div>
+
+        </div>
+    </section>
 }
 
 

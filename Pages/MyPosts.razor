@@ -150,7 +150,7 @@ else
 
     private async Task<List<TKAPosts>> SortRecords(string columnName, string dir)
     {
-        return await postService.ListAllPosts((curPage - 1) * pageSize, pageSize, columnName, dir, searchTerm);
+        return await postService.ListAllUserPosts(UserName, (curPage - 1) * pageSize, pageSize, columnName, dir, searchTerm);
     }
 
     private async Task SortTable(string columnName)
@@ -196,7 +196,7 @@ else
 
     public async Task refreshRecords(int currentPage)
     {
-        postModel = await postService.ListAllPosts((currentPage - 1) * pageSize, pageSize, sortColumnName, sortDir, searchTerm);
+        postModel = await postService.ListAllUserPosts(UserName, (currentPage - 1) * pageSize, pageSize, sortColumnName, sortDir, searchTerm);
         curPage = currentPage;
         this.StateHasChanged();
     }

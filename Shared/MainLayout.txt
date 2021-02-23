@@ -1,0 +1,31 @@
+﻿CREATE PROCEDURE [dbo].[Create_Post]    
+		@Title NVARCHAR(250),
+	    @Description TEXT,
+	    @Username NVARCHAR(250)
+AS    
+    BEGIN    
+ DECLARE @Id as BIGINT  
+        INSERT INTO [TKAPosts](Title, Description, Username, CreatedOn, ModifiedOn, PostPublished, PostApproved, IsDeleted)
+		VALUES(@Title, @Description, @Username, SYSDATETIME(), SYSDATETIME(), 'Y', 'Y', 'N');   
+		SET @Id = SCOPE_IDENTITY();   
+        SELECT  @Id AS PostID;    
+    END;   
+GO	
+
+
+
+CREATE PROCEDURE [dbo].[Create_Post]    
+		@Title NVARCHAR(250),
+	    @Description TEXT,
+	    @Username NVARCHAR(250)
+	    /*@ModifiedOn DATETIME, 
+	    @PostPublished NVARCHAR(5),
+	    @PostApproved NVARCHAR(5),
+	    @IsDeleted NVARCHAR(5)*/
+	AS    
+		BEGIN    
+		INSERT INTO [TKAPosts](Title, Description, Username, CreatedOn, ModifiedOn, PostPublished, PostApproved, IsDeleted)
+		VALUES(@Title, @Description, @Username, SYSDATETIME(), SYSDATETIME(), 'Y', 'Y', 'N');
+		--UPDATE [TKAPosts] SET Title = @Title, Description = @Description, ModifiedOn = SYSDATETIME() WHERE PostId = @PostId 
+	           
+		END;

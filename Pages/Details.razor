@@ -1,56 +1,82 @@
 ﻿@page "/postDetails/{PostId}"
 @inject IPostService postService
 @inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+<!-- ======= Blog Section ======= -->
+<section id="blog" class="blog space100">
+    <div class="container" style="margin-left:5%; max-width:100%;">
 
-<style>
-    
-</style>
-<header>
-</header>
+        <div class="row">
 
-<div class="card-body">
-    <h5 class="card-title">@postEntity.Title</h5>
-    <p>@postEntity.Username on <small class="card-title  text-muted">@postEntity.CreatedOn</small></p><br />
-    <p>
-        <div class="card-text">@postEntity.Description</div>
-    </p>
-    <br />
+            <div class="col-lg-8 entries" style="flex:0 0 100%; max-width:100%;">
 
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <textarea class="control-label" rows="5" cols="65" placeholder="Write your comment here...." @bind=@tkaposts.Comment></textarea>
-    </div>
-</div><br/>
-<button type="button" class="btn btn-primary float-right" @onclick="() => CreateComment()">Save Comment</button>
+                <article class="entry entry-single">
+                    <!--
+                                <div class="entry-img">
+                                    <img src="/img/blog-1.jpg" alt="" class="img-fluid">
+                                </div>
+                -->
+                    <h2 class="entry-title">
+                        <a href="#">@postEntity.Title</a>
+                    </h2>
 
-<div class="comment-reply-section">
+                    <div class="entry-meta">
+                        <ul>
+                            <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="#">@postEntity.Username</a></li>
+                            <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="#"><time datetime="2020-01-01">@postEntity.CreatedOn</time></a></li>
+                            <li class="d-flex align-items-center"><i class="icofont-comment"></i> <a href="#">12</a></li>
+                        </ul>
+                    </div>
+                    <div class="entry-content">
+                        @postEntity.Description
+                    </div>
 
-    @if (commentModel == null || commentModel.Count == 0)
-    {
-        <p>There are no comments for this post</p>
-    }
-    else
-    {
-        <div class="comment-count text-muted">
-            <p>@commentModel.Count comments</p>
+                </article>
+            </div>
         </div>
+        <div class="blog-comments">
+            @if (commentModel == null || commentModel.Count == 0)
+            {
+                <p>There are no comments for this post</p>
+            }
+            else
+            {
 
-        @foreach (var tka in commentModel)
-        {
 
-<div class="card-body">
-    <p>@tka.Username on <small class="card-title  text-muted">@tka.CreatedOn</small></p>
-    <h5 class="card-title">@tka.Comment</h5>
-    <p>
-        <a class="btn btn-secondary float-right" Text="Read more" href='/postDetails/@tka.PostId'>Reply</a>
-    </p>
-</div>
-        }
+                <h4 class="comments-count">@commentModel.Count Comments</h4>
 
-    }
-</div>
-<button type="button" class="btn btn-danger" @onclick="() => cancel()">Back</button>
+                @foreach (var tka in commentModel)
+                {
+
+                    <div id="comment-1" class="comment clearfix">
+                        <img src="assets/img/comments-1.jpg" class="comment-img  float-left" alt="">
+                        <h5><a href="">@tka.Username</a> <a href="#" class="reply"><i class="icofont-reply"></i> Reply</a></h5>
+                        <time datetime="2020-01-01">@tka.CreatedOn</time>
+                        <p>@tka.Comment</p>
+
+                    </div><!-- End comment #1 -->
+                }
+
+            }
+            <!--comment-box section-->
+            <div class="reply-form" style="width:70%; margin-left:10%; margin-top: 5%;">
+                <h4>Leave a Comment</h4>
+                <form action="">
+                    <div class="row">
+                        <div class="col form-group">
+                            <textarea name="comment" class="form-control" placeholder="Type Your Comment.." @bind=@tkaposts.Comment></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" @onclick="() => CreateComment()">Post Comment</button>
+
+                </form>
+
+            </div>
+            <!--End of comment-box section-->
+        </div>
+        <button type="button" class="btn btn-danger" @onclick="() => cancel()" style="margin-left:10%;">Back</button>
+    </div>
+</section>
+
 
 @code {
 
@@ -68,7 +94,7 @@
     /*for retrieving comments*/
     List<TKAComments> commentModel;
     TKAComments commentEntity = new TKAComments();
-  
+
 
     TKAComments tkaposts = new TKAComments();
 
