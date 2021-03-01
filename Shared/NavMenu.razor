@@ -2,7 +2,7 @@
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-        <h1 class="logo mr-auto"><a href="/">The Kingdom Age</a></h1>
+        <h1 class="logo mr-auto"><a href="/"><span style="font-family:Brush Script MT;">The</span><span style="color:#339612;"> Kingdom</span><span style="font-family:Brush Script MT;">Age</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -11,25 +11,34 @@
 
                 <li class="active"><a href="/">Home</a></li>
                 <li class="drop-down">
-                    <a href="#">About</a>
+                    <a href="">About</a>
                     <ul>
-                        <li><a href="#">Our Pastor</a></li>
-                        <li><a href="#">Our Members</a></li>
-                        <li><a href="#">Our Beliefs</a></li>
-                        <li><a href="#">Our Ministries</a></li>
+                        <li><a href="">Our Pastor</a></li>
+                        <li><a href="">Our Teachings</a></li>
+                        <li><a href="">Our Beliefs</a></li>
+                        <li><a href="">Our Ministries</a></li>
                     </ul>
                 </li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="/gallery">Sermons</a></li>
-                <li><a href="/contactus">Contact us</a></li>
+                <li><a href="/sermons">Sermons</a></li>
+                <li class="drop-down">
+                    <a href="">Programs</a>
+                    <ul>
+                        <li><a href="">Upcoming programs</a></li>
+                        <li><a href="">Church Services</a></li>
+                        <li><a href="">News</a></li>
+                        <li><a href="">Events</a></li>
+                    </ul>
+                </li>
+                <li><a href="/contactus">Contact</a></li>
                 <AuthorizeView>
                     <Authorized>
                         <li><a href="/postlist">Heavenly Ideas</a></li>
                         <li class="drop-down">
                             <a href="">Profile</a>
                             <ul>
-                                <li><a href="#">My Account</a></li>
-                                <li><a href="#">Log-out</a></li>
+                                <li><a href="">My Account</a></li>
+                                <li><a href="">My Inbox</a></li>
+                                <li><Logout /></li>
                             </ul>
                         </li>
                     </Authorized>

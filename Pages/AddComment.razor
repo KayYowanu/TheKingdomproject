@@ -11,7 +11,7 @@
             <textarea class="control-label" rows="7" cols="65" placeholder="Write the Description here...." @bind=@tkaposts.Comment></textarea>
             <br />
             <br />
-            <button type="button" class="btn btn-primary" @onclick="() => CreateComment()">Save Comment</button>
+            <button type="button" class="btn btn-primary" @onclick="() => SendEmail()">Save Comment</button>
             <button type="button" class="btn btn-danger" @onclick="() => cancel()">Cancel</button>
 
         </form>
@@ -22,10 +22,25 @@
 
     TKAComments tkaposts = new TKAComments();
 
-    protected async Task CreateComment()
-    {
-        //await postService.CreateComment(tkaposts);
-        navigationManager.NavigateTo("/myposts");
+    public static void SendEmail()
+    { try
+            {
+                MailMessage message = new MailMessage();
+                SmtpClient smtp = new SmtpClient();
+                message.From = new MailAddress("geezyk695@gmail.com");
+                message.To.Add(new MailAddress("kanswatayowanu@gmail.com"));
+                message.Subject = "John Doe Commented on your post";
+                message.IsBodyHtml = true; //to make message body as html  
+                message.Body = "John Doe Commented on your pos";
+                smtp.Port = 587;
+                smtp.Host = "smtp.gmail.com"; //for gmail host  
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential("geezyk695@gmail.com", "Cornelius@Gmail");
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.Send(message);
+            }
+            catch (Exception) { }
     }
 
     void cancel()

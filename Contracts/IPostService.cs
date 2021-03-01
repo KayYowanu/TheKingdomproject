@@ -23,5 +23,9 @@ namespace TheGospel.Contracts
         Task<TKAComments> GetCommentById(int Id);
         Task<List<TKAComments>> ListAllComments();
         Task<List<TKAComments>> ListAllComments(int Id);
+
+        /*FOR EMAIL IMPLEMENTATION*/
+
+        Task<List<TKAComments>> GetUserEmail(int Id);//The email of the user who comments on a post
     }
 }

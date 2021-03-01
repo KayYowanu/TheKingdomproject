@@ -207,5 +207,12 @@ namespace TheGospel.Concrete
 
             return result;
         }
+
+        /*FOR EMAIL IMPLEMENTATION*/
+        public List<T> GetUserEmail<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)
+        {
+            using IDbConnection db = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+            return db.Query<T>(sp, parms, commandType: commandType).ToList();
+        }
     }
 }

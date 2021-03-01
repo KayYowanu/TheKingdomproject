@@ -22,5 +22,8 @@ namespace TheGospel.Contracts
         int ExecuteComment(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);
         T InsertComment<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);
         T UpdateComment<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);
+
+        /*FOR COMMENT IMPLEMENTATION*/
+        List<T> GetUserEmail<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);
     }
 }

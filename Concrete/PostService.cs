@@ -131,5 +131,13 @@ namespace TheGospel.Concrete
                             commandType: CommandType.StoredProcedure));
             return updatecomment;
         }
+
+        //Email
+        public Task<List<TKAComments>> GetUserEmail(int Id)
+        {
+            var userEmail = Task.FromResult(_postrepo.GetUserEmail<TKAComments>
+                ($"SELECT Username FROM [TKAPosts] where PostId = {Id}", null, commandType: CommandType.Text));
+            return userEmail;
+        }
     }
 }

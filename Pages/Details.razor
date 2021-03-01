@@ -1,6 +1,8 @@
 ﻿@page "/postDetails/{PostId}"
 @inject IPostService postService
 @inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+@using System.Data.SqlClient;
+@using TheGospel.Contracts;
 <!-- ======= Blog Section ======= -->
 <section id="blog" class="blog space100">
     <div class="container" style="margin-left:5%; max-width:100%;">
@@ -11,10 +13,10 @@
 
                 <article class="entry entry-single">
                     <!--
-                                <div class="entry-img">
-                                    <img src="/img/blog-1.jpg" alt="" class="img-fluid">
-                                </div>
-                -->
+                                    <div class="entry-img">
+                                        <img src="/img/blog-1.jpg" alt="" class="img-fluid">
+                                    </div>
+                    -->
                     <h2 class="entry-title">
                         <a href="#">@postEntity.Title</a>
                     </h2>
@@ -23,7 +25,6 @@
                         <ul>
                             <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="#">@postEntity.Username</a></li>
                             <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="#"><time datetime="2020-01-01">@postEntity.CreatedOn</time></a></li>
-                            <li class="d-flex align-items-center"><i class="icofont-comment"></i> <a href="#">12</a></li>
                         </ul>
                     </div>
                     <div class="entry-content">
@@ -33,7 +34,147 @@
                 </article>
             </div>
         </div>
-        <div class="blog-comments">
+
+        <!-- ======= Rating Section ======= -->
+        <div class="rating-main">
+            <Accordion>
+                <Collapse Visible="@collapseVisible">
+                    <Button Clicked="@(()=>collapseVisible = !collapseVisible)" style="padding:0px;">
+                        <CollapseHeader> Rate this post </CollapseHeader>
+                    </Button>
+                    <CollapseBody>
+                        <!--Start-->
+                        <!--*****************************************************************************************************************************-->
+                        <Collapse Visible="@collapse1Visible">
+                            <Button Clicked="@(()=>collapse1Visible = !collapse1Visible)" style="padding:0px;">
+                                <CollapseHeader Style="height:40px; text-align:center;">How would you rate this? 1</CollapseHeader>
+                            </Button>
+                            <CollapseBody Style="height:40px; margin-bottom:20px;">
+                                <p>
+                                    <input type="radio" id="verybad" name="rating" value="very bad">
+                                    <label for="verybad">Very Bad</label>
+                                    <input type="radio" id="bad" name="rating" value="bad">
+                                    <label for="bad">Bad</label>
+                                    <input type="radio" id="moderate" name="rating" value="moderate">
+                                    <label for="moderate">Moderate</label>
+                                    <input type="radio" id="good" name="rating" value="good">
+                                    <label for="good">Good</label>
+                                    <input type="radio" id="verygood" name="rating" value="verygood">
+                                    <label for="verygood">Very Good</label>
+                                </p>
+                            </CollapseBody>
+                        </Collapse>
+                        <!--*****************************************************************************************************************************-->
+                        <Collapse Visible="@collapse2Visible" style="padding:0px;">
+                            <Button Clicked="@(()=>collapse2Visible = !collapse2Visible)" style="padding:0px;">
+                                <CollapseHeader Style="height:40px; text-align:center;">How would you rate this? 2 </CollapseHeader>
+                            </Button>
+                            <CollapseBody Style="height:40px; margin-bottom:20px;">
+                                <p>
+                                    <input type="radio" id="verybad" name="rating" value="very bad">
+                                    <label for="verybad">Very Bad</label>
+                                    <input type="radio" id="bad" name="rating" value="bad">
+                                    <label for="bad">Bad</label>
+                                    <input type="radio" id="moderate" name="rating" value="moderate">
+                                    <label for="moderate">Moderate</label>
+                                    <input type="radio" id="good" name="rating" value="good">
+                                    <label for="good">Good</label>
+                                    <input type="radio" id="verygood" name="rating" value="verygood">
+                                    <label for="verygood">Very Good</label>
+                                </p>
+                            </CollapseBody>
+                        </Collapse>
+                        <!--*****************************************************************************************************************************-->
+
+                        <Collapse Visible="@collapse3Visible">
+                            <Button Clicked="@(()=>collapse3Visible = !collapse3Visible)" style="padding:0px;">
+                                <CollapseHeader Style="height:40px; text-align:center;"> How would you rate this? 3</CollapseHeader>
+                            </Button>
+                            <CollapseBody Style="height:40px; margin-bottom:20px;">
+                                <p>
+                                    <input type="radio" id="verybad" name="rating" value="very bad">
+                                    <label for="verybad">Very Bad</label>
+                                    <input type="radio" id="bad" name="rating" value="bad">
+                                    <label for="bad">Bad</label>
+                                    <input type="radio" id="moderate" name="rating" value="moderate">
+                                    <label for="moderate">Moderate</label>
+                                    <input type="radio" id="good" name="rating" value="good">
+                                    <label for="good">Good</label>
+                                    <input type="radio" id="verygood" name="rating" value="verygood">
+                                    <label for="verygood">Very Good</label>
+                                </p>
+                            </CollapseBody>
+                        </Collapse>
+                        <!--*****************************************************************************************************************************-->
+                        <Collapse Visible="@collapse4Visible">
+                            <Button Clicked="@(()=>collapse4Visible = !collapse4Visible)" style="padding:0px;">
+                                <CollapseHeader Style="height:40px; text-align:center;"> How would you rate this? 4</CollapseHeader>
+                            </Button>
+                            <CollapseBody Style="height:40px; margin-bottom:20px;">
+                                <p>
+                                    <input type="radio" id="verybad" name="rating" value="very bad">
+                                    <label for="verybad">Very Bad</label>
+                                    <input type="radio" id="bad" name="rating" value="bad">
+                                    <label for="bad">Bad</label>
+                                    <input type="radio" id="moderate" name="rating" value="moderate">
+                                    <label for="moderate">Moderate</label>
+                                    <input type="radio" id="good" name="rating" value="good">
+                                    <label for="good">Good</label>
+                                    <input type="radio" id="verygood" name="rating" value="verygood">
+                                    <label for="verygood">Very Good</label>
+                                </p>
+                            </CollapseBody>
+                        </Collapse>
+                        <!--*****************************************************************************************************************************-->
+                        <Collapse Visible="@collapse5Visible">
+                            <Button Clicked="@(()=>collapse5Visible = !collapse5Visible)" style="padding:0px;">
+                                <CollapseHeader Style="height:40px; text-align:center;">How would you rate this? 5</CollapseHeader>
+                            </Button>
+                            <CollapseBody Style="height:40px; margin-bottom:20px;">
+                                <p>
+                                    <input type="radio" id="verybad" name="rating" value="very bad">
+                                    <label for="verybad">Very Bad</label>
+                                    <input type="radio" id="bad" name="rating" value="bad">
+                                    <label for="bad">Bad</label>
+                                    <input type="radio" id="moderate" name="rating" value="moderate">
+                                    <label for="moderate">Moderate</label>
+                                    <input type="radio" id="good" name="rating" value="good">
+                                    <label for="good">Good</label>
+                                    <input type="radio" id="verygood" name="rating" value="verygood">
+                                    <label for="verygood">Very Good</label>
+                                </p>
+                            </CollapseBody>
+                        </Collapse>
+                        <!--*****************************************************************************************************************************-->
+                        <Collapse Visible="@collapse6Visible">
+                            <Button Clicked="@(()=>collapse6Visible = !collapse6Visible)" style="padding:0px;">
+                                <CollapseHeader Style="height:40px; text-align:center;">How would you rate this? 6</CollapseHeader>
+                            </Button>
+                            <CollapseBody Style="height:40px; margin-bottom:20px;">
+                                <p>
+                                    <input type="radio" id="verybad" name="rating" value="very bad">
+                                    <label for="verybad">Very Bad</label>
+                                    <input type="radio" id="bad" name="rating" value="bad">
+                                    <label for="bad">Bad</label>
+                                    <input type="radio" id="moderate" name="rating" value="moderate">
+                                    <label for="moderate">Moderate</label>
+                                    <input type="radio" id="good" name="rating" value="good">
+                                    <label for="good">Good</label>
+                                    <input type="radio" id="verygood" name="rating" value="verygood">
+                                    <label for="verygood">Very Good</label>
+                                </p>
+                            </CollapseBody>
+                        </Collapse>
+                        <!--*****************************************************************************************************************************-->
+
+                    </CollapseBody><!--End-->
+                </Collapse>
+
+            </Accordion>
+        </div>
+        <!-- End of Rating Section -->
+
+        <div class="blog-comments space100">
             @if (commentModel == null || commentModel.Count == 0)
             {
                 <p>There are no comments for this post</p>
@@ -42,18 +183,19 @@
             {
 
 
-                <h4 class="comments-count">@commentModel.Count Comments</h4>
+                <!--Comment count-->
+                <h4 class="comments-count"><i class="icofont-comment"></i>@commentModel.Count Comments</h4>
 
                 @foreach (var tka in commentModel)
                 {
-
+                    <!--Comments Section-->
                     <div id="comment-1" class="comment clearfix">
                         <img src="assets/img/comments-1.jpg" class="comment-img  float-left" alt="">
                         <h5><a href="">@tka.Username</a> <a href="#" class="reply"><i class="icofont-reply"></i> Reply</a></h5>
                         <time datetime="2020-01-01">@tka.CreatedOn</time>
                         <p>@tka.Comment</p>
 
-                    </div><!-- End comment #1 -->
+                    </div><!-- End of Comment Section-->
                 }
 
             }
@@ -80,8 +222,20 @@
 
 @code {
 
+
+    //For Rating
+    bool collapseVisible = false;
+    bool collapse1Visible = false;
+    bool collapse2Visible = false;
+    bool collapse3Visible = false;
+    bool collapse4Visible = false;
+    bool collapse5Visible = false;
+    bool collapse6Visible = false;
+
+
     [Parameter]
     public string PostId { get; set; }
+    //public string UserEmail ;
 
     TKAPosts postEntity = new TKAPosts();
 
@@ -89,19 +243,65 @@
     {
         postEntity = await postService.GetPostById(Convert.ToInt32(PostId));
         commentModel = await postService.ListAllComments(Convert.ToInt32(PostId));
+        UserEmail = await postService.GetUserEmail(Convert.ToInt32(PostId));
     }
 
     /*for retrieving comments*/
-    List<TKAComments> commentModel;
+    List<TKAComments>
+    commentModel;
     TKAComments commentEntity = new TKAComments();
+
+    List<TKAComments>
+    UserEmail;
 
 
     TKAComments tkaposts = new TKAComments();
 
+
+
+
+    //Send Email Function
+    public void SendEmail(string UserEmail)
+    {
+        //Concrete me = new Concrete();
+        try
+        {
+
+            /*string ConString = "Data Source=sun2.qlogics.com,4433;Initial Catalog=kyBlazor;User ID=oqtane_web;Password=Heavy44@@WatersZZ";
+            using (SqlConnection connection = new SqlConnection(ConString))
+            {
+                // Creating SqlCommand objcet
+                SqlCommand cm = new SqlCommand("select * from student", connection);
+                // Opening Connection
+                connection.Open();
+                // Executing the SQL query
+                SqlDataReader sdr = cm.ExecuteReader();*/
+
+            MailMessage message = new MailMessage();
+            SmtpClient smtp = new SmtpClient();
+            message.From = new MailAddress("geezyk695@gmail.com");
+            message.To.Add(new MailAddress(UserEmail));
+            message.Subject = "The Kingdom Age Comments";
+            message.IsBodyHtml = true; //to make message body as html
+            message.Body = "John Doe Commented on your pos";
+            smtp.Port = 587;
+            smtp.Host = "smtp.gmail.com"; //for gmail host
+            smtp.EnableSsl = true;
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new System.Net.NetworkCredential("geezyk695@gmail.com", "Cornelius@Gmail");
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.Send(message);
+        }
+        catch (Exception) { }
+    }
+
     protected async Task CreateComment()
     {
         await postService.CreateComment(tkaposts, postEntity);
+        //string UserEmail = postEntity.Username;//"kanswatayowanu@gmail.com";
+        SendEmail(postEntity.Username);
         navigationManager.NavigateTo("/postlist");
+
     }
 
 

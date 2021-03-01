@@ -5,45 +5,64 @@
 @inject IHttpContextAccessor httpContextAccessor
 <AuthorizeView>
     <Authorized>
-        <h1>
-            Add Post
-        </h1>
-        <style>
-        </style>
-        <div class="row">
-            <div class="col-md-6">
-                <form>
-                    <label for="Name" class="control-label">Title: </label>
-                    <input for="Name" class="form-control" placeholder="Write the Title here...." @bind-value="@tkaposts.Title" />
-                    <br />
-                    <br />
-                    <textarea class="control-label" rows="7" cols="65" placeholder="Write the Description here...." @bind=@tkaposts.Description></textarea>
-                    <br />
-                    <br />
-                    <button type="button" class="btn btn-primary" @onclick="() => CreatePost()">Save Post</button>
-                    <button type="button" class="btn btn-danger" @onclick="() => cancel()">Cancel</button>
+        <section id="blog" class="blog space100">
+            <div class="container" style="margin-left:2%; max-width:90%;">
+                <!--
+            <div class="row">
+                <div class="col-md-6">
+                    <form>
+                        <label for="Name" class="control-label">Title: </label>
+                        <input for="Name" class="form-control" placeholder="Write the Title here...." @bind-value="@tkaposts.Title" />
+                        <br />
+                        <br />
+                        <textarea class="control-label" rows="7" cols="65" placeholder="Write the Description here...." @bind=@tkaposts.Description></textarea>
+                        <br />
+                        <br />
+                        <button type="button" class="btn btn-primary" @onclick="() => CreatePost()">Save Post</button>
+                        <button type="button" class="btn btn-danger" @onclick="() => cancel()">Cancel</button>
 
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
+            -->
+                <!--comment-box section-->
+                <div class="reply-form" style="margin-left:5%;">
+                    <form action="">
+                        <div class="row">
+                            <div class="col form-group">
+                                <h4>Title</h4><textarea name="comment" rows="1" cols="60" class="form-control" placeholder="Write the post title here.." @bind=@tkaposts.Description></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col form-group">
+                                <h4>Description</h4><textarea name="comment" rows="15" cols="60" class="form-control" placeholder="Write the post description here.." @bind=@tkaposts.Description></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" @onclick="() => CreatePost()">Save Post</button>
+                        <button type="button" class="btn btn-danger float-right" @onclick="() => cancel()">Back</button>
+                    </form>
 
+                </div>
+                <!--End of comment-box section-->
 
-        @code {
+                </div>
+            </section>
+                @code {
 
-            TKAPosts tkaposts = new TKAPosts();
-            public string UserName;
-            protected async Task CreatePost()
-            {
-                UserName = httpContextAccessor.HttpContext.User.Identity.Name;
-                await postService.CreatePost(tkaposts, UserName);
-                navigationManager.NavigateTo("/myposts");
-            }
+                    TKAPosts tkaposts = new TKAPosts();
+                    public string UserName;
+                    protected async Task CreatePost()
+                    {
+                        UserName = httpContextAccessor.HttpContext.User.Identity.Name;
+                        await postService.CreatePost(tkaposts, UserName);
+                        navigationManager.NavigateTo("/myposts");
+                    }
 
-            void cancel()
-            {
-                navigationManager.NavigateTo("/myposts");
-            }
+                    void cancel()
+                    {
+                        navigationManager.NavigateTo("/myposts");
+                    }
 
-        }
+                }
     </Authorized>
 </AuthorizeView>

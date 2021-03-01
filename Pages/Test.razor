@@ -1,0 +1,128 @@
+﻿@page "/test"
+@using Syncfusion.Blazor.Navigations
+
+<section id="faq" class="faq space100">
+    <div class="container">
+            <SfAccordion>
+                <AccordionItems>
+                    <AccordionItem>
+                        <HeaderTemplate> <a data-toggle="collapse" class="collapsed">Rate the Post</a></HeaderTemplate>
+                        <ContentTemplate>
+                            <SfAccordion ExpandMode="@ExpandMode.Single">
+                                <AccordionItems>
+                                    <AccordionItem>
+                                        <HeaderTemplate>Sensor</HeaderTemplate>
+                                        <ContentTemplate>
+                                            <div>
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="e-bold">Proximity sensor</td>
+                                                            <td>Yes</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="e-bold">Face ID</td>
+                                                            <td>Yes</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="e-bold">Accelerometer</td>
+                                                            <td>Yes</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </ContentTemplate>
+                                    </AccordionItem>
+                                    <AccordionItem>
+                                        <HeaderTemplate><div id="faq1" class="collapse show" data-parent=".faq-list">On moral grounds</div></HeaderTemplate>
+                                        <ContentTemplate>
+                                            <p>
+                                                <input type="radio" id="verybad" name="rating" value="very bad">
+                                                <label for="verybad">Very Bad</label>
+                                                <input type="radio" id="bad" name="rating" value="bad">
+                                                <label for="bad">Bad</label>
+                                                <input type="radio" id="moderate" name="rating" value="moderate">
+                                                <label for="moderate">Moderate</label>
+                                                <input type="radio" id="good" name="rating" value="good">
+                                                <label for="good">Good</label>
+                                                <input type="radio" id="verygood" name="rating" value="verygood">
+                                                <label for="verygood">Very Good</label>
+                                            </p>
+                                        </ContentTemplate>
+                                    </AccordionItem>
+                                    <AccordionItem>
+                                        <HeaderTemplate>Video Recording</HeaderTemplate>
+                                        <ContentTemplate>
+                                            <div>
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th class="e-bold" rowspan="9">Video Recording</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="e-bold">4K video recording</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="e-bold">1080p & 720p HD video recording</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="e-bold">Optical zoom, 6x digital zoom</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="e-bold">Slow motion video support</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="e-bold">Take 8MP still photos while recording 4K video</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="e-bold">Noise reduction</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </ContentTemplate>
+                                    </AccordionItem>
+                                </AccordionItems>
+                            </SfAccordion>
+                        </ContentTemplate>
+                    </AccordionItem>
+
+                </AccordionItems>
+            </SfAccordion>
+        </div>
+    </section>
+    <style>
+        @@-moz-document url-prefix() {
+            .e-accordion .e-content table {
+                border-collapse: initial;
+            }
+        }
+
+        .e-accordion table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+        }
+
+            .e-accordion table th,
+            .e-accordion table td {
+                font-weight: normal;
+                padding: 5px;
+                text-align: left;
+                border: 1px solid #ddd
+            }
+
+        .product_title {
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px 0;
+            text-overflow: ellipsis;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .accordion-control-section {
+            margin: 0 10% 0 10%;
+            padding-bottom: 25px;
+        }
+    </style>
