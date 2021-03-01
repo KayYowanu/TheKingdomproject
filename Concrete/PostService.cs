@@ -76,11 +76,12 @@ namespace TheGospel.Concrete
         }
 
         /*FOR COMMENTS IMPLEMENTATIONS*/
-        public Task<int> CreateComment(TKAComments tkacomments, TKAPosts tkaposts)
+        public Task<int> CreateComment(TKAComments tkacomments, TKAPosts tkaposts, string Username)
         {
             var dbPara = new DynamicParameters();
             dbPara.Add("Comment", tkacomments.Comment, DbType.String);
             dbPara.Add("PostId", tkaposts.PostId, DbType.String);
+            dbPara.Add("Username", Username, DbType.String);
             var CommentId = Task.FromResult(_postrepo.InsertComment<int>("[dbo].[Add_Comment]",
                             dbPara,
                             commandType: CommandType.StoredProcedure));
