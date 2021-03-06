@@ -6,16 +6,16 @@
         @for (int i = 0; i < items.Count; i++)
         {
             Item item = items[i];
-            <BlazorStrap.BSCarouselItem src="@item.Source" alt="@item.Alt" ActionLink="@items[i].ActionLink" ActionLinkTarget="@items[i].ActionLinkTarget" style="width:100%; height:500px;/*For Hero picture Sizing*/">
+<BlazorStrap.BSCarouselItem src="@item.Source" alt="@item.Alt" ActionLink="@items[i].ActionLink" ActionLinkTarget="@items[i].ActionLinkTarget" style="width:100%; height:500px;/*For Hero picture Sizing*/">
 
-                <BlazorStrap.BSCarouselCaption style="color:red; font-family:'Bell MT'; font-size:20px;" HeaderText="@item.Header" />
-                <!--<BlazorStrap.BSCarouselCaption CaptionText="@item.Caption" style="color:yellow"/>-->
-
-            </BlazorStrap.BSCarouselItem>
-
-        }
+    <BlazorStrap.BSCarouselCaption style="color:red; font-family:'Bell MT'; font-size:20px;" HeaderText="@item.Header"></BlazorStrap.BSCarouselCaption>
+    <BlazorStrap.BSCarouselCaption CaptionText="@item.Caption" style="color:blue; font-size:30px; padding-bottom:100px;" />
+    <!--*
+    <BlazorStrap.BSCarouselCaption CaptionText ="@item.Button" style="color:green; width:150px; margin-bottom:200px; margin-left:30%; background-color: #4CAF50; border: none; color: white; text-align: center; text-decoration: none; font-size: 16px; border-radius: 12px;">Button</BlazorStrap.BSCarouselCaption>
+    -->
+</BlazorStrap.BSCarouselItem>}
     </div>
-    <BlazorStrap.BSCarouselControl CarouselDirection="BlazorStrap.CarouselDirection.Previous" NumberOfItems="@items.Count" />
+    <BlazorStrap.BSCarouselControl CarouselDirection="BlazorStrap.CarouselDirection.Previous" NumberOfItems="@items.Count"   />
     <BlazorStrap.BSCarouselControl CarouselDirection="BlazorStrap.CarouselDirection.Next" NumberOfItems="@items.Count" />
 </BlazorStrap.BSCarousel>
 <!-- ======= Services Section ======= -->
@@ -70,35 +70,39 @@
     </div>
 </section><!-- End Services Section -->
 @code {
-    int i = 0;
-    IList<Item> items = new List<Item>
+    int i = 0;
+    IList<Item> items = new List<Item>
 {
-       new Item {
-           Source = "/img/slide/slide1.jpg",
-           Alt ="First Slide",
-           //Caption = "Slide 1",
-           Header = "Slide 1 Header",
-           //ActionLink = "link here/",
-           ActionLinkTarget = "_blank"
-       },
-       new Item {
-           Source = "/img/slide/slide2.jpg",
-           Alt ="Second Slide",
-           //Caption = "Slide 2",
-           Header = "Slide 2 Header",
-          // ActionLink = "link here/",
-           ActionLinkTarget = "_blank"
-       },
-       new Item {
-           Source = "/img/slide/slide3.jpg",
-           Alt ="Third Slide",
-           //Caption = "Slide 3",
-           Header = "Slide 3 Header",
-          // ActionLink = "link here/",
-           ActionLinkTarget = "_blank"
-       }
+       new Item {
+           Source = "/img/slide/slide1.jpg",
+           Alt ="First Slide",
+           Caption = "the fire must be kept burning on the altar continuously; it must not go out ...",
+           Header = "Leviticus 6:13",
+           //ActionLink = "link here/",
+           ActionLinkTarget = "_blank",
+           //Button = "Watch Live Service"
+       },
+       new Item {
+           Source = "/img/slide/slide2.jpg",
+           Alt ="Second Slide",
+           Caption = "For I know the plans I have for you,” declares the LORD, “plans to prosper you and not to harm you, plans to give you hope and a future.",
+           Header = "Jeremiah 29:11",
+          // ActionLink = "link here/",
+           ActionLinkTarget = "_blank",
+           //Button = "Watch Live Service-2"
+       },
+       new Item {
+           Source = "/img/slide/slide3.jpg",
+           Alt ="Third Slide",
+           Caption = "So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.",
+           Header = "Isaiah 41:10",
+          // ActionLink = "link here/",
+           ActionLinkTarget = "_blank",
+          // Button = "Watch Live Service-3"
 
-   };
+       }
+
+   };
     class Item
     {
         public string Source { get; set; }
